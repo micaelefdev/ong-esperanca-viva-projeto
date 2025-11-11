@@ -1,6 +1,15 @@
-alert("Script carregando com sucesso!");
-// --- Máscara automática para telefone ---
+// --- Menu hambúrguer ---
 document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const nav = document.querySelector(".navbar ul");
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  }
+
+  // --- Máscara automática de telefone ---
   const tel = document.getElementById("telefone");
   if (tel) {
     tel.addEventListener("input", (e) => {
@@ -20,14 +29,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- Mensagem de sucesso ao enviar ---
+  // --- Validação do formulário ---
   const form = document.getElementById("cadastroForm");
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      alert("✅ Cadastro enviado com sucesso!");
+
+      // Pega os valores
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const telefone = document.getElementById("telefone").value.trim();
+      const area = document.getElementById("area").value;
+
+      // Verifica se tudo foi preenchido
+      if (!nome || !email || !telefone || !area) {
+        alert("Por favor, preencha todos os campos obrigatórios!");
+        return;
+      }
+
+      // Mostra mensagem de sucesso
+      const msg = document.createElement("p");
+      msg.textContent = "Cadastro enviado com sucesso!";
+      msg.style.color = "green";
+      msg.style.fontWeight = "bold";
+      msg.style.marginTop = "15px";
+      form.appendChild(msg);
+
+      // Limpa o formulário
       form.reset();
+
+      // Remove a mensagem após 4 segundos
+      setTimeout(() => {
+        msg.remove();
+      }, 4000);
     });
   }
 });
-
