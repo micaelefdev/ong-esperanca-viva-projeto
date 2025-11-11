@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - ONG Esperança Viva</title>
+    <title>Cadastro de Voluntário - ONG Esperança Viva</title>
 
     <style>
         body {
@@ -97,8 +97,8 @@
     <h2>Faça parte da nossa causa e transforme vidas!</h2>
     <p>Preencha o formulário abaixo:</p>
 
-    <!-- FORMULÁRIO COMPLETO -->
-    <form id="formCadastro" onsubmit="return validarFormulario()">
+    <!-- FORMULÁRIO -->
+    <form id="formCadastro">
         <label>Nome completo:</label>
         <input type="text" id="nome" placeholder="Digite seu nome completo">
 
@@ -106,7 +106,7 @@
         <input type="email" id="email" placeholder="exemplo@email.com">
 
         <label>Telefone:</label>
-        <input type="text" id="telefone" maxlength="15" placeholder="(87) 9 9933-6143" oninput="mascaraTelefone(this)">
+        <input type="text" id="telefone" maxlength="15" placeholder="(87) 9 9933-6143">
 
         <label>Área de interesse:</label>
         <select id="area">
@@ -130,21 +130,24 @@
 </footer>
 
 <script>
-function mascaraTelefone(campo) {
-    let valor = campo.value.replace(/\D/g, "");
-
-    if (valor.length > 11) valor = valor.slice(0, 11);
+// MÁSCARA DO TELEFONE
+document.getElementById("telefone").addEventListener("input", function () {
+    let valor = this.value.replace(/\D/g, "");
+    if (valor.length > 11) valor = valor.substring(0, 11);
 
     if (valor.length > 6) {
-        campo.value = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)} ${valor.slice(3, 7)}-${valor.slice(7, 11)}`;
+        this.value = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)} ${valor.slice(3, 7)}-${valor.slice(7, 11)}`;
     } else if (valor.length > 2) {
-        campo.value = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
+        this.value = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
     } else {
-        campo.value = valor;
+        this.value = valor;
     }
-}
+});
 
-function validarFormulario() {
+// VALIDAÇÃO DO FORMULÁRIO
+document.getElementById("formCadastro").addEventListener("submit", function (event) {
+    event.preventDefault(); // Impede a página de recarregar
+
     let nome = document.getElementById("nome").value.trim();
     let email = document.getElementById("email").value.trim();
     let telefone = document.getElementById("telefone").value.trim();
@@ -155,13 +158,12 @@ function validarFormulario() {
     if (!nome || !email || !telefone || !area || !mensagem) {
         retorno.style.color = "red";
         retorno.innerText = "❌ Preencha todos os campos antes de enviar.";
-        return false;
+        return;
     }
 
     retorno.style.color = "green";
     retorno.innerText = "✅ Cadastro enviado com sucesso!";
-    return false;
-}
+});
 </script>
 
 </body>
