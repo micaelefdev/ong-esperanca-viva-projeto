@@ -47,22 +47,27 @@ function validarFormulario() {
   return false; // Impede envio real para servidor
 }
 
-// --- Máscara para o telefone ---
-const campoTelefone = document.getElementById("telefone");
+// --- Máscara automática para telefone ---
+document.addEventListener("DOMContentLoaded", () => {
+  const tel = document.getElementById("telefone");
+  if (tel) {
+    tel.addEventListener("input", (e) => {
+      let valor = e.target.value.replace(/\D/g, "");
 
-if (campoTelefone) {
-  campoTelefone.addEventListener("input", function (e) {
-    let valor = e.target.value.replace(/\D/g, "");
+      // Limita a 11 dígitos (com DDD)
+      if (valor.length > 11) valor = valor.substring(0, 11);
 
-    if (valor.length > 11) valor = valor.slice(0, 11);
+      if (valor.length > 10) {
+        e.target.value = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+      } else if (valor.length > 6) {
+        e.target.value = valor.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
+      } else if (valor.length > 2) {
+        e.target.value = valor.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
+      } else {
+        e.target.value = valor;
+      }
+    });
+  }
+});
 
-    if (valor.length > 6) {
-      e.target.value = (${valor.slice(0, 2)}) ${valor.slice(2, 7)}-${valor.slice(7)};
-    } else if (valor.length > 2) {
-      e.target.value = (${valor.slice(0, 2)}) ${valor.slice(2)};
-    } else {
-      e.target.value = valor;
-    }
-  });
-}
 
