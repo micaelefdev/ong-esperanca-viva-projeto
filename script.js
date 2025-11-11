@@ -1,6 +1,3 @@
-// --- Confirma se o JavaScript carregou ---
-alert("O JavaScript carregou corretamente!");
-
 // --- Máscara automática para telefone ---
 document.addEventListener("DOMContentLoaded", () => {
   const tel = document.getElementById("telefone");
@@ -22,20 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- Envio do formulário ---
+  // --- Mensagem de sucesso ao enviar ---
   const form = document.getElementById("cadastroForm");
-  const msg = document.getElementById("mensagem-sucesso");
-
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      msg.style.display = "block";
-
-      // Limpa o formulário após 3 segundos
-      setTimeout(() => {
-        form.reset();
-        msg.style.display = "none";
-      }, 3000);
+      alert("✅ Cadastro enviado com sucesso!");
+      form.reset();
     });
   }
 });
