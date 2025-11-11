@@ -1,92 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projetos</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+<style>
+body { font-family: Arial, sans-serif; background: #ecf8f2; margin:0; }
 
-        /* ===== MENU ===== */
-        header {
-            background-color: #4CAF50;
-            padding: 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* MENU */
+header {
+    background: #2e7d32;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+.menu-btn {font-size: 26px; background: none; border:none; cursor:pointer; color:white;}
+nav {display:none; flex-direction:column; background:#2e7d32; padding:10px;}
+nav a {padding:12px; color:white; text-decoration:none;}
+nav a:hover {background:#1f5a23;}
 
-        .menu-btn {
-            font-size: 35px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-
-        nav {
-            display: none;
-            flex-direction: column;
-            background-color: #4CAF50;
-            padding: 10px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a:hover {
-            background-color: #388E3C;
-        }
-
-        /* Conteúdo */
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-        }
-
-        h1 {
-            text-align: center;
-        }
-    </style>
+.logo-container {text-align:center; margin-top:10px;}
+.logo-container img {width:120px;}
+main {text-align:center; margin-top:25px;}
+footer {background:#2e7d32; color:white; text-align:center; padding:10px; margin-top:40px;}
+</style>
 </head>
 <body>
 
 <header>
-    <h2>Projeto</h2>
     <button class="menu-btn" id="menuBtn">☰</button>
 </header>
 
 <nav id="menu">
     <a href="index.html">Início</a>
-    <a href="projeto.html">Projeto</a>
+    <a href="projetos.html">Projetos</a>
     <a href="cadastro.html">Cadastro</a>
 </nav>
 
-<div class="container">
-    <h1>Sobre o Projeto</h1>
-    <p>Informações do projeto aqui...</p>
+<div class="logo-container">
+    <img src="logo.png" alt="Logo ONG">
 </div>
 
-<script>
-    const menu = document.getElementById("menu");
-    const menuBtn = document.getElementById("menuBtn");
+<main>
+    <h2>Projetos</h2>
+    <p>Conheça nossos projetos sociais.</p>
+</main>
 
-    menuBtn.addEventListener("click", () => {
-        const aberto = menu.style.display === "block";
-        menu.style.display = aberto ? "none" : "block";
-        menuBtn.textContent = aberto ? "☰" : "✖";
-    });
+<footer>© 2025 ONG Esperança Viva - Todos os direitos reservados.</footer>
+
+<script>
+const menu = document.getElementById("menu");
+const menuBtn = document.getElementById("menuBtn");
+menuBtn.addEventListener("click", () => {
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    menuBtn.textContent = menuBtn.textContent === "☰" ? "✖" : "☰";
+});
 </script>
 
 </body>
