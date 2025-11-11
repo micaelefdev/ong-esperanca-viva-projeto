@@ -1,90 +1,63 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro - ONG Esperança Viva</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<form id="formCadastro" onsubmit="return validarFormulario()">
+    <label>Nome completo:</label><br>
+    <input type="text" id="nome" placeholder="Digite seu nome completo"><br><br>
 
-  <header>
-    <div class="logo">
-      <img src="imagens/logo.png" alt="Logo da ONG Esperança Viva">
-    </div>
-    <nav class="navbar">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html">Projetos</a></li>
-        <li><a href="cadastro.html" class="ativo">Cadastro</a></li>
-        <li><a href="contato.html">Contato</a></li>
-      </ul>
-    </nav>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
+    <label>E-mail:</label><br>
+    <input type="email" id="email" placeholder="exemplo@email.com"><br><br>
 
-  <main>
-    <section class="banner">
-      <img src="imagens/banner.jpg" alt="Banner de Cadastro">
-      <div class="banner-texto">
-        <h1>Cadastro de Voluntário</h1>
-        <p>Faça parte da nossa causa e transforme vidas!</p>
-      </div>
-    </section>
+    <label>Telefone:</label><br>
+    <input type="text" id="telefone" maxlength="15" placeholder="(87) 9 9933-6143" oninput="mascaraTelefone(this)"><br><br>
 
-    <section class="formulario">
-      <h2>Preencha o formulário abaixo:</h2>
-      <form id="cadastroForm">
-        <div class="form-grupo">
-          <label for="nome">Nome completo:</label>
-          <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
-        </div>
+    <label>Área de interesse:</label><br>
+    <select id="area">
+        <option value="">Selecione...</option>
+        <option value="Educação">Educação</option>
+        <option value="Eventos">Eventos</option>
+        <option value="Comunicação">Comunicação</option>
+    </select><br><br>
 
-        <div class="form-grupo">
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required placeholder="exemplo@email.com">
-        </div>
+    <label>Por que deseja ser voluntário?</label><br>
+    <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea><br><br>
 
-        <div class="form-grupo">
-          <label for="telefone">Telefone:</label>
-          <input type="tel" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx">
-        </div>
+    <button type="submit" style="background-color: green; color: white; padding: 10px;">
+        Enviar Cadastro
+    </button>
 
-        <div class="form-grupo">
-          <label for="area">Área de interesse:</label>
-          <select id="area" name="area" required>
-            <option value="">Selecione...</option>
-            <option value="educacao">Educação</option>
-            <option value="alimentacao">Alimentação</option>
-            <option value="comunidade">Ações Comunitárias</option>
-          </select>
-        </div>
+    <!-- Aqui aparece a mensagem de erro ou sucesso -->
+    <p id="retorno" style="font-weight: bold;"></p>
+</form>
 
-        <div class="form-grupo">
-          <label for="mensagem">Por que deseja ser voluntário?</label>
-          <textarea id="mensagem" name="mensagem" rows="4" placeholder="Digite sua mensagem"></textarea>
-        </div>
+<script>
+function mascaraTelefone(campo) {
+    let valor = campo.value.replace(/\D/g, "");
 
-        <button type="submit" class="btn">Enviar Cadastro</button>
-      </form>
+    if (valor.length > 11) valor = valor.slice(0, 11);
 
-      <p id="mensagem-sucesso" style="display:none; color:green; font-weight:bold; margin-top:10px;">
-        ✅ Cadastro enviado com sucesso!
-      </p>
-    </section>
-  </main>
+    if (valor.length > 6) {
+        campo.value = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)} ${valor.slice(3, 7)}-${valor.slice(7, 11)}`;
+    } else if (valor.length > 2) {
+        campo.value = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
+    } else {
+        campo.value = valor;
+    }
+}
 
-  <footer>
-    <p>&copy; 2025 ONG Esperança Viva - Todos os direitos reservados.</p>
-  </footer>
-<script src="script.js"></script>
-</body>
-</html>
+function validarFormulario() {
+    let nome = document.getElementById("nome").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let telefone = document.getElementById("telefone").value.trim();
+    let area = document.getElementById("area").value;
+    let mensagem = document.getElementById("mensagem").value.trim();
+    let retorno = document.getElementById("retorno");
 
+    if (!nome || !email || !telefone || !area || !mensagem) {
+        retorno.style.color = "red";
+        retorno.innerText = "❌ Preencha todos os campos antes de enviar.";
+        return false;
+    }
 
-
-
+    retorno.style.color = "green";
+    retorno.innerText = "✅ Cadastro enviado com sucesso!";
+    return false; // remove isso se quiser enviar para o backend depois
+}
+</script>
