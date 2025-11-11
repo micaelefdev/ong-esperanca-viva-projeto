@@ -13,10 +13,10 @@
             background-color: #f4f4f4;
         }
 
-        /* ----- MENU ----- */
+        /* ===== MENU ===== */
         header {
             background-color: #4CAF50;
-            padding: 10px;
+            padding: 15px;
             color: white;
             display: flex;
             justify-content: space-between;
@@ -33,23 +33,23 @@
 
         nav {
             display: none;
-            background: #4CAF50;
+            flex-direction: column;
+            background-color: #4CAF50;
             padding: 10px;
         }
 
         nav a {
-            display: block;
-            padding: 10px;
             color: white;
             text-decoration: none;
+            padding: 10px;
             text-align: center;
         }
 
         nav a:hover {
-            background: #45a049;
+            background-color: #388E3C;
         }
 
-        /* ----- FORMULÁRIO ----- */
+        /* ===== FORMULÁRIO ===== */
         .container {
             max-width: 400px;
             margin: 40px auto;
@@ -58,10 +58,28 @@
             border-radius: 8px;
         }
 
-        input, textarea, select {
+        input, textarea {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #388E3C;
         }
 
         .success {
@@ -91,13 +109,12 @@
 </nav>
 
 <div class="container">
-
     <h2>Cadastro de Voluntário</h2>
 
     <form id="cadastroForm">
-        <input type="text" id="nome" placeholder="Nome completo">
-        <input type="tel" id="telefone" placeholder="Telefone">
-        <textarea id="mensagem" placeholder="Descrição da disponibilidade"></textarea>
+        <input type="text" id="nome" placeholder="Nome completo" required>
+        <input type="tel" id="telefone" placeholder="Telefone (87) 9 9933-6143" required>
+        <textarea id="mensagem" placeholder="Descrição da disponibilidade" required></textarea>
         <button type="submit">Enviar Cadastro</button>
     </form>
 
@@ -105,37 +122,32 @@
 </div>
 
 <script>
-    // MENU HAMBÚRGUER
+    /* ===== MENU HAMBÚRGUER ===== */
     const menu = document.getElementById("menu");
     const menuBtn = document.getElementById("menuBtn");
 
     menuBtn.addEventListener("click", () => {
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
-        menuBtn.textContent = menu.style.display === "block" ? "✖" : "☰";
+        const aberto = menu.style.display === "block";
+        menu.style.display = aberto ? "none" : "block";
+        menuBtn.textContent = aberto ? "☰" : "✖";
     });
 
-    // FORMULÁRIO
+    /* ===== FORMULÁRIO ===== */
     const form = document.getElementById("cadastroForm");
     const retorno = document.getElementById("mensagemRetorno");
     const telefone = document.getElementById("telefone");
 
-    // formatar telefone automaticamente
     telefone.addEventListener("input", () => {
         telefone.value = telefone.value
             .replace(/\D/g, "")
             .replace(/(\d{2})(\d)/, "($1) $2")
-            .replace(/(\d{1})(\d{4})(\d{4})/, "$1 $2-$3");
+            .replace(/(\d)(\d{4})(\d{4})$/, "$1 $2-$3");
     });
 
-    // validação do envio
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        let nome = document.getElementById("nome").value.trim();
-        let tel = telefone.value.trim();
-        let msg = document.getElementById("mensagem").value.trim();
-
-        if (nome === "" || tel === "" || msg === "") {
+        if (!nome.value.trim() || !telefone.value.trim() || !mensagem.value.trim()) {
             retorno.textContent = "⚠️ Preencha todos os campos!";
             retorno.className = "error";
             return;
