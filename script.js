@@ -46,31 +46,56 @@ function validarFormulario() {
 
   return false; // Impede envio real para servidor
 }
+// --- DEBUG + Máscara confiável para telefone (cole no final do script.js) ---
+document.addEventListener("DOMContentLoaded", function () {
+  // removemos possíveis debug antigos
+  const oldDebug = document.getElementById("debug-tel-status");
+  if (oldDebug) oldDebug.remove();
 
-// --- Máscara automática para telefone ---
-document.addEventListener("DOMContentLoaded", () => {
+  // cria um aviso visível na página (apenas para debug, pode remover depois)
+  const debug = document.createElement("div");
+  debug.id = "debug-tel-status";
+  debug.style.background = "#fff3cd";
+  debug.style.border = "1px solid #ffeeba";
+  debug.style.color = "#856404";
+  debug.style.padding = "8px";
+  debug.style.margin = "8px 0";
+  debug.style.borderRadius = "6px";
+  debug.style.fontSize = "14px";
+  debug.textContent = "Status: procurando campo de telefone...";
+  // anexa no topo do main (se existir) ou no body
+  const mainEl = document.querySelector("main") || document.body;
+  mainEl.insertBefore(debug, mainEl.firstChild);
+
   const tel = document.getElementById("telefone");
-  if (tel) {
-    tel.addEventListener("input", (e) => {
-      let valor = e.target.value.replace(/\D/g, "");
+  if (!tel) {
+    debug.textContent = "Status: campo com id='telefone' NÃO encontrado. Verifique o id no cadastro.html.";
+    return;
+  }
 
-      // Limita a 11 dígitos (com DDD)
-      if (valor.length > 11) valor = valor.substring(0, 11);
+  debug.textContent = "Status: campo 'telefone' encontrado. Listener será ativado.";
 
-      if (valor.length > 10) {
-        e.target.value = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
-      } else if (valor.length > 6) {
-        e.target.value = valor.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
-      } else if (valor.length > 2) {
-        e.target.value = valor.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
+  // função que aplica máscara (robusta)
+  function aplicarMascaraTelefone(el) {
+    el.addEventListener("input", function (e) {
+      let v = e.target.value.replace(/\D/g, "");
+      if (v.length > 11) v = v.slice(0, 11);
+
+      if (v.length > 10) {
+        e.target.value = v.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+      } else if (v.length > 6) {
+        e.target.value = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
+      } else if (v.length > 2) {
+        e.target.value = v.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
       } else {
-        e.target.value = valor;
+        e.target.value = v;
       }
-    });
-  }
+      // atualiza o debug com o valor atual para você ver
+      debug.textContent = Status: listener ativo — valor atual: "${e.target.value}";
+    }, { passive: true });
+  }
+
+  // ativa a máscara
+  aplicarMascaraTelefone(tel);
+  debug.textContent = "Status: listener ativo. Digite números no campo telefone para ver a formatação.";
 });
-
-
-
-
-
