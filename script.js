@@ -1,3 +1,4 @@
+alert("Script carregando com sucesso!");
 // --- Máscara automática para telefone ---
 document.addEventListener("DOMContentLoaded", () => {
   const tel = document.getElementById("telefone");
@@ -29,3 +30,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
