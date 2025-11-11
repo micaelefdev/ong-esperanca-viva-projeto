@@ -1,31 +1,133 @@
-<form id="formCadastro" onsubmit="return validarFormulario()">
-    <label>Nome completo:</label><br>
-    <input type="text" id="nome" placeholder="Digite seu nome completo"><br><br>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - ONG Esperança Viva</title>
 
-    <label>E-mail:</label><br>
-    <input type="email" id="email" placeholder="exemplo@email.com"><br><br>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
 
-    <label>Telefone:</label><br>
-    <input type="text" id="telefone" maxlength="15" placeholder="(87) 9 9933-6143" oninput="mascaraTelefone(this)"><br><br>
+        header {
+            background-color: #4CAF50;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 22px;
+        }
 
-    <label>Área de interesse:</label><br>
-    <select id="area">
-        <option value="">Selecione...</option>
-        <option value="Educação">Educação</option>
-        <option value="Eventos">Eventos</option>
-        <option value="Comunicação">Comunicação</option>
-    </select><br><br>
+        nav ul {
+            list-style: none;
+            padding: 10px;
+            background-color: #4CAF50;
+            text-align: right;
+        }
 
-    <label>Por que deseja ser voluntário?</label><br>
-    <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea><br><br>
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
 
-    <button type="submit" style="background-color: green; color: white; padding: 10px;">
-        Enviar Cadastro
-    </button>
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    <!-- Aqui aparece a mensagem de erro ou sucesso -->
-    <p id="retorno" style="font-weight: bold;"></p>
-</form>
+        .container {
+            width: 60%;
+            margin: 40px auto;
+        }
+
+        form {
+            font-size: 18px;
+        }
+
+        input, select, textarea {
+            width: 95%;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            padding: 12px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0b7a13;
+        }
+
+        footer {
+            background-color: #0b5534;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    Cadastro de Voluntário - ONG Esperança Viva
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
+        <li><a href="cadastro.html">Cadastro</a></li>
+        <li><a href="contato.html">Contato</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h2>Faça parte da nossa causa e transforme vidas!</h2>
+    <p>Preencha o formulário abaixo:</p>
+
+    <!-- FORMULÁRIO COMPLETO -->
+    <form id="formCadastro" onsubmit="return validarFormulario()">
+        <label>Nome completo:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome completo">
+
+        <label>E-mail:</label>
+        <input type="email" id="email" placeholder="exemplo@email.com">
+
+        <label>Telefone:</label>
+        <input type="text" id="telefone" maxlength="15" placeholder="(87) 9 9933-6143" oninput="mascaraTelefone(this)">
+
+        <label>Área de interesse:</label>
+        <select id="area">
+            <option value="">Selecione...</option>
+            <option value="Educação">Educação</option>
+            <option value="Eventos">Eventos</option>
+            <option value="Comunicação">Comunicação</option>
+        </select>
+
+        <label>Por que deseja ser voluntário?</label>
+        <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea>
+
+        <button type="submit">Enviar Cadastro</button>
+
+        <p id="retorno" style="font-weight: bold;"></p>
+    </form>
+</div>
+
+<footer>
+    © 2025 ONG Esperança Viva - Todos os direitos reservados.
+</footer>
 
 <script>
 function mascaraTelefone(campo) {
@@ -58,6 +160,9 @@ function validarFormulario() {
 
     retorno.style.color = "green";
     retorno.innerText = "✅ Cadastro enviado com sucesso!";
-    return false; // remove isso se quiser enviar para o backend depois
+    return false;
 }
 </script>
+
+</body>
+</html>
