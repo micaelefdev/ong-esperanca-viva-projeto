@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - ONG Esperança Viva</title>
   <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <img src="imagens/logo.png" alt="Logo da ONG Esperança Viva">
+      <img src="imagens/logo.png" alt="Logo da ONG Esperança Viva">
     </div>
     <nav class="navbar">
       <ul>
@@ -30,7 +30,7 @@
 
   <main>
     <section class="banner">
-      <img src="imagens/banner.jpg" alt="Banner de Cadastro">
+      <img src="imagens/banner.jpg" alt="Banner de Cadastro">
       <div class="banner-texto">
         <h1>Cadastro de Voluntário</h1>
         <p>Faça parte da nossa causa e transforme vidas!</p>
@@ -39,7 +39,7 @@
 
     <section class="formulario">
       <h2>Preencha o formulário abaixo:</h2>
-      <form id="cadastroForm" onsubmit="return validarFormulario()">
+      <form id="cadastroForm">
         <div class="form-grupo">
           <label for="nome">Nome completo:</label>
           <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
@@ -52,7 +52,7 @@
 
         <div class="form-grupo">
           <label for="telefone">Telefone:</label>
-<input type="tel" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx">
+          <input type="tel" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx">
         </div>
 
         <div class="form-grupo">
@@ -72,6 +72,10 @@
 
         <button type="submit" class="btn">Enviar Cadastro</button>
       </form>
+
+      <p id="mensagem-sucesso" style="display:none; color:green; font-weight:bold; margin-top:10px;">
+        ✅ Cadastro enviado com sucesso!
+      </p>
     </section>
   </main>
 
@@ -80,10 +84,4 @@
   </footer>
 
 </body>
-
 </html>
-
-
-
-
-
