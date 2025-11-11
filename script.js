@@ -99,3 +99,4 @@ document.addEventListener("DOMContentLoaded", function () {
   aplicarMascaraTelefone(tel);
   debug.textContent = "Status: listener ativo. Digite números no campo telefone para ver a formatação.";
 });
+
