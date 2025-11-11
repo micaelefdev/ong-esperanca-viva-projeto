@@ -1,169 +1,150 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Voluntário - ONG Esperança Viva</title>
+    <title>Cadastro Voluntário</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
+            background-color: #f4f4f4;
         }
 
+        /* ----- MENU ----- */
         header {
             background-color: #4CAF50;
-            padding: 20px;
-            color: white;
-            text-align: center;
-            font-size: 22px;
-        }
-
-        nav ul {
-            list-style: none;
             padding: 10px;
-            background-color: #4CAF50;
-            text-align: right;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
             color: white;
-            text-decoration: none;
-            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .container {
-            width: 60%;
-            margin: 40px auto;
-        }
-
-        form {
-            font-size: 18px;
-        }
-
-        input, select, textarea {
-            width: 95%;
-            padding: 8px;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        button {
-            background-color: green;
-            color: white;
-            padding: 12px;
+        .menu-btn {
+            font-size: 35px;
+            background: none;
             border: none;
-            font-size: 18px;
+            color: white;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #0b7a13;
+        nav {
+            display: none;
+            background: #4CAF50;
+            padding: 10px;
         }
 
-        footer {
-            background-color: #0b5534;
+        nav a {
+            display: block;
+            padding: 10px;
             color: white;
+            text-decoration: none;
             text-align: center;
-            padding: 15px;
-            margin-top: 40px;
+        }
+
+        nav a:hover {
+            background: #45a049;
+        }
+
+        /* ----- FORMULÁRIO ----- */
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
-
 <body>
 
 <header>
-    Cadastro de Voluntário - ONG Esperança Viva
+    <h2>Cadastro</h2>
+    <button class="menu-btn" id="menuBtn">☰</button>
 </header>
 
-<nav>
-    <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html">Projetos</a></li>
-        <li><a href="cadastro.html">Cadastro</a></li>
-        <li><a href="contato.html">Contato</a></li>
-    </ul>
+<nav id="menu">
+    <a href="index.html">Início</a>
+    <a href="projeto.html">Projeto</a>
+    <a href="cadastro.html">Cadastro</a>
 </nav>
 
 <div class="container">
-    <h2>Faça parte da nossa causa e transforme vidas!</h2>
-    <p>Preencha o formulário abaixo:</p>
 
-    <!-- FORMULÁRIO -->
-    <form id="formCadastro">
-        <label>Nome completo:</label>
-        <input type="text" id="nome" placeholder="Digite seu nome completo">
+    <h2>Cadastro de Voluntário</h2>
 
-        <label>E-mail:</label>
-        <input type="email" id="email" placeholder="exemplo@email.com">
-
-        <label>Telefone:</label>
-        <input type="text" id="telefone" maxlength="15" placeholder="(87) 9 9933-6143">
-
-        <label>Área de interesse:</label>
-        <select id="area">
-            <option value="">Selecione...</option>
-            <option value="Educação">Educação</option>
-            <option value="Eventos">Eventos</option>
-            <option value="Comunicação">Comunicação</option>
-        </select>
-
-        <label>Por que deseja ser voluntário?</label>
-        <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea>
-
+    <form id="cadastroForm">
+        <input type="text" id="nome" placeholder="Nome completo">
+        <input type="tel" id="telefone" placeholder="Telefone">
+        <textarea id="mensagem" placeholder="Descrição da disponibilidade"></textarea>
         <button type="submit">Enviar Cadastro</button>
-
-        <p id="retorno" style="font-weight: bold;"></p>
     </form>
+
+    <p id="mensagemRetorno"></p>
 </div>
 
-<footer>
-    © 2025 ONG Esperança Viva - Todos os direitos reservados.
-</footer>
-
 <script>
-// MÁSCARA DO TELEFONE
-document.getElementById("telefone").addEventListener("input", function () {
-    let valor = this.value.replace(/\D/g, "");
-    if (valor.length > 11) valor = valor.substring(0, 11);
+    // MENU HAMBÚRGUER
+    const menu = document.getElementById("menu");
+    const menuBtn = document.getElementById("menuBtn");
 
-    if (valor.length > 6) {
-        this.value = `(${valor.slice(0, 2)}) ${valor.slice(2, 3)} ${valor.slice(3, 7)}-${valor.slice(7, 11)}`;
-    } else if (valor.length > 2) {
-        this.value = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
-    } else {
-        this.value = valor;
-    }
-});
+    menuBtn.addEventListener("click", () => {
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+        menuBtn.textContent = menu.style.display === "block" ? "✖" : "☰";
+    });
 
-// VALIDAÇÃO DO FORMULÁRIO
-document.getElementById("formCadastro").addEventListener("submit", function (event) {
-    event.preventDefault(); // Impede a página de recarregar
+    // FORMULÁRIO
+    const form = document.getElementById("cadastroForm");
+    const retorno = document.getElementById("mensagemRetorno");
+    const telefone = document.getElementById("telefone");
 
-    let nome = document.getElementById("nome").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let telefone = document.getElementById("telefone").value.trim();
-    let area = document.getElementById("area").value;
-    let mensagem = document.getElementById("mensagem").value.trim();
-    let retorno = document.getElementById("retorno");
+    // formatar telefone automaticamente
+    telefone.addEventListener("input", () => {
+        telefone.value = telefone.value
+            .replace(/\D/g, "")
+            .replace(/(\d{2})(\d)/, "($1) $2")
+            .replace(/(\d{1})(\d{4})(\d{4})/, "$1 $2-$3");
+    });
 
-    if (!nome || !email || !telefone || !area || !mensagem) {
-        retorno.style.color = "red";
-        retorno.innerText = "❌ Preencha todos os campos antes de enviar.";
-        return;
-    }
+    // validação do envio
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    retorno.style.color = "green";
-    retorno.innerText = "✅ Cadastro enviado com sucesso!";
-});
+        let nome = document.getElementById("nome").value.trim();
+        let tel = telefone.value.trim();
+        let msg = document.getElementById("mensagem").value.trim();
+
+        if (nome === "" || tel === "" || msg === "") {
+            retorno.textContent = "⚠️ Preencha todos os campos!";
+            retorno.className = "error";
+            return;
+        }
+
+        retorno.textContent = "✅ Cadastro enviado com sucesso!";
+        retorno.className = "success";
+        form.reset();
+    });
 </script>
 
 </body>
