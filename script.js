@@ -1,46 +1,7 @@
-// --- MENU HAMBÚRGUER ---
-const menuToggle = document.getElementById("menu-toggle");
-const nav = document.querySelector(".navbar");
+// --- Confirma se o JavaScript carregou ---
+alert("O JavaScript carregou corretamente!");
 
-if (menuToggle && nav) {
-  menuToggle.addEventListener("click", () => {
-    nav.classList.toggle("open");
-  });
-}
-
-// --- MENSAGEM DE SUCESSO DO FORMULÁRIO ---
-function validarFormulario() {
-  const nome = document.getElementById("nome").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const telefone = document.getElementById("telefone").value.trim();
-  const area = document.getElementById("area").value;
-  
-  if (!nome || !email || !telefone || !area) {
-    alert("Por favor, preencha todos os campos obrigatórios!");
-    return false;
-  }
-
-  // Cria a mensagem verde de sucesso
-  const msg = document.createElement("div");
-  msg.textContent = "Cadastro enviado com sucesso!";
-  msg.style.background = "#28a745";
-  msg.style.color = "white";
-  msg.style.padding = "10px";
-  msg.style.marginTop = "10px";
-  msg.style.borderRadius = "5px";
-  msg.style.textAlign = "center";
-
-  const form = document.getElementById("cadastroForm");
-  form.appendChild(msg);
-
-  // some depois de alguns segundos
-  setTimeout(() => msg.remove(), 4000);
-
-  form.reset();
-  return false;
-}
-
-// --- MÁSCARA AUTOMÁTICA PARA TELEFONE ---
+// --- Máscara automática para telefone ---
 document.addEventListener("DOMContentLoaded", () => {
   const tel = document.getElementById("telefone");
   if (tel) {
@@ -58,6 +19,23 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         e.target.value = valor;
       }
+    });
+  }
+
+  // --- Envio do formulário ---
+  const form = document.getElementById("cadastroForm");
+  const msg = document.getElementById("mensagem-sucesso");
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      msg.style.display = "block";
+
+      // Limpa o formulário após 3 segundos
+      setTimeout(() => {
+        form.reset();
+        msg.style.display = "none";
+      }, 3000);
     });
   }
 });
