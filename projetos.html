@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projetos - ONG Esperança Viva</title>
-  <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* ===== MENU ===== */
+        header {
+            background-color: #4CAF50;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-btn {
+            font-size: 35px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav {
+            display: none;
+            flex-direction: column;
+            background-color: #4CAF50;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #388E3C;
+        }
+
+        /* Conteúdo */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="img/logo.png" alt="Logo da ONG Esperança Viva">
-    </div>
-    <nav class="navbar">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html" class="ativo">Projetos</a></li>
-        <li><a href="cadastro.html">Cadastro</a></li>
-        <li><a href="contato.html">Contato</a></li>
-      </ul>
-    </nav>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
+<header>
+    <h2>Projeto</h2>
+    <button class="menu-btn" id="menuBtn">☰</button>
+</header>
 
-  <main>
-    <section class="banner">
-      <img src="imagens/banner.jpg" alt="Banner dos Projetos">
-      <div class="banner-texto">
-        <h1>Nossos Projetos</h1>
-        <p>Conheça as ações que estão transformando vidas!</p>
-      </div>
-    </section>
+<nav id="menu">
+    <a href="index.html">Início</a>
+    <a href="projeto.html">Projeto</a>
+    <a href="cadastro.html">Cadastro</a>
+</nav>
 
-    <section class="projetos-grid">
-      <h2>Projetos em andamento</h2>
-      <div class="grid-container">
-        <div class="card">
-          <img src="img/projeto1.jpg" alt="Crianças estudando">
-          <h3>Educação para Todos</h3>
-          <p>Oferecemos reforço escolar e oficinas de leitura para crianças carentes.</p>
-        </div>
+<div class="container">
+    <h1>Sobre o Projeto</h1>
+    <p>Informações do projeto aqui...</p>
+</div>
 
-        <div class="card">
-          <img src="img/projeto2.jpg" alt="Doação de alimentos">
-          <h3>Alimento Solidário</h3>
-          <p>Distribuímos cestas básicas e refeições para famílias em vulnerabilidade.</p>
-        </div>
+<script>
+    const menu = document.getElementById("menu");
+    const menuBtn = document.getElementById("menuBtn");
 
-        <div class="card">
-          <img src="img/projeto3.jpg" alt="Ações comunitárias">
-          <h3>Ação Comunitária</h3>
-          <p>Organizamos eventos de saúde, cultura e cidadania em comunidades.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 ONG Esperança Viva - Todos os direitos reservados.</p>
-  </footer>
+    menuBtn.addEventListener("click", () => {
+        const aberto = menu.style.display === "block";
+        menu.style.display = aberto ? "none" : "block";
+        menuBtn.textContent = aberto ? "☰" : "✖";
+    });
+</script>
 
 </body>
-
 </html>
-
