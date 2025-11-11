@@ -69,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-alert("Script carregado com sucesso!");
+
+
 
 
 
