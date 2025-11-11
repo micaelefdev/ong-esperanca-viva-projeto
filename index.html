@@ -1,92 +1,133 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONG Esperança Viva</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+<style>
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ===== MENU ===== */
-        header {
-            background-color: #4CAF50;
-            padding: 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #ecf8f2;
+}
 
-        .menu-btn {
-            font-size: 35px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
+/* MENU */
+header {
+    background: #2e7d32;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
 
-        nav {
-            display: none;
-            flex-direction: column;
-            background-color: #4CAF50;
-            padding: 10px;
-        }
+.menu-btn {
+    font-size: 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            text-align: center;
-        }
+nav {
+    display: none;
+    flex-direction: column;
+    background: #2e7d32;
+    padding: 10px;
+}
 
-        nav a:hover {
-            background-color: #388E3C;
-        }
+nav a {
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
 
-        /* Conteúdo */
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-        }
+nav a:hover {
+    background: #1f5a23;
+}
 
-        h1 {
-            text-align: center;
-        }
-    </style>
+/* LOGO CENTRALIZADA */
+.logo-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.logo-container img {
+    width: 120px;
+}
+
+/* BANNER */
+.banner {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.banner img {
+    width: 55%;
+    border-radius: 18px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* TEXTO DESTAQUE */
+section {
+    text-align: center;
+    margin-top: 18px;
+}
+</style>
 </head>
 <body>
 
 <header>
-    <h2>Início</h2>
     <button class="menu-btn" id="menuBtn">☰</button>
 </header>
 
 <nav id="menu">
     <a href="index.html">Início</a>
-    <a href="projeto.html">Projeto</a>
+    <a href="projetos.html">Projetos</a>
     <a href="cadastro.html">Cadastro</a>
 </nav>
 
-<div class="container">
-    <h1>Bem-vindo ao Projeto</h1>
-    <p>Este site foi criado para gerenciamento de voluntários.</p>
+<!-- LOGO CENTRALIZADA -->
+<div class="logo-container">
+    <img src="logo.png" alt="Logo ONG">
 </div>
 
-<script>
-    const menu = document.getElementById("menu");
-    const menuBtn = document.getElementById("menuBtn");
+<section>
+    <h2>ONG Esperança Viva</h2>
+    <p>Transformando vidas com solidariedade</p>
+</section>
 
-    menuBtn.addEventListener("click", () => {
-        const aberto = menu.style.display === "block";
-        menu.style.display = aberto ? "none" : "block";
-        menuBtn.textContent = aberto ? "☰" : "✖";
-    });
+<!-- BANNER CENTRAL -->
+<div class="banner">
+    <img src="banner.jpg" alt="Voluntariado">
+</div>
+
+<section>
+    <h3>Juntos podemos transformar o mundo</h3>
+    <p>Conheça nossos projetos e descubra como sua ajuda pode mudar vidas.</p>
+</section>
+
+<footer style="background:#2e7d32; color:white; padding:8px; text-align:center; margin-top:40px;">
+    © 2025 ONG Esperança Viva - Todos os direitos reservados.
+</footer>
+
+<script>
+/* MENU HAMBÚRGUER */
+const menu = document.getElementById("menu");
+const menuBtn = document.getElementById("menuBtn");
+
+menuBtn.addEventListener("click", () => {
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+        menuBtn.textContent = "☰";
+    } else {
+        menu.style.display = "block";
+        menuBtn.textContent = "✖";
+    }
+});
 </script>
 
 </body>
