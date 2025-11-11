@@ -48,9 +48,21 @@ function validarFormulario() {
 }
 
 // --- Máscara para o telefone ---
-document.getElementById("telefone")?.addEventListener("input", function (e) {
-  let valor = e.target.value.replace(/\D/g, "");
-  valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
-  valor = valor.replace(/(\d{5})(\d{4})$/, "$1-$2");
-  e.target.value = valor;
-});
+const campoTelefone = document.getElementById("telefone");
+
+if (campoTelefone) {
+  campoTelefone.addEventListener("input", function (e) {
+    let valor = e.target.value.replace(/\D/g, "");
+
+    if (valor.length > 11) valor = valor.slice(0, 11);
+
+    if (valor.length > 6) {
+      e.target.value = (${valor.slice(0, 2)}) ${valor.slice(2, 7)}-${valor.slice(7)};
+    } else if (valor.length > 2) {
+      e.target.value = (${valor.slice(0, 2)}) ${valor.slice(2)};
+    } else {
+      e.target.value = valor;
+    }
+  });
+}
+
