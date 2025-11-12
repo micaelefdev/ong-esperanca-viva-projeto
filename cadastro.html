@@ -1,94 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastro</title>
-
-<style>
-body { font-family:Arial, sans-serif; background: #ecf8f2; margin:0; }
-
-/* MENU */
-header {background:#2e7d32; padding:12px; display:flex; justify-content:flex-end;}
-.menu-btn {font-size:26px; background:none; border:none; cursor:pointer; color:white;}
-nav {display:none; flex-direction:column; background:#2e7d32; padding:10px;}
-nav a {padding:12px; color:white; text-decoration:none;}
-nav a:hover {background:#1f5a23;}
-
-.logo-container{text-align:center; margin-top:10px;}
-.logo-container img {width:120px;}
-
-/* FORM */
-form {background:white; padding:25px; width:330px; margin:25px auto; border-radius:12px;}
-input {width:100%; padding:8px; margin-bottom:12px;}
-button {background:#2e7d32; color:white; padding:10px; border:none; cursor:pointer;}
-button:hover{background:#1f5a23;}
-#msg {text-align:center; margin-top:10px;}
-footer {background:#2e7d32; color:white; text-align:center; padding:10px; margin-top:40px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Voluntário</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <button class="menu-btn" id="menuBtn">☰</button>
+    <img src="logo.png" class="logo" alt="Logo da ONG">
+
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="projeto.html">Projeto</a></li>
+            <li><a href="cadastro.html" class="ativo">Cadastro</a></li>
+        </ul>
+    </nav>
+
+    <!-- Botão hamburguer (mobile) -->
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 </header>
 
-<nav id="menu">
-    <a href="index.html">Início</a>
-    <a href="projetos.html">Projetos</a>
-    <a href="cadastro.html">Cadastro</a>
-</nav>
-
-<div class="logo-container">
-    <img src="logo.png" alt="Logo ONG">
-</div>
-
-<form id="form">
+<!------------------------------------------
+ FORMULÁRIO COMPLETO
+------------------------------------------->
+<section class="form-section">
     <h2>Cadastro de Voluntário</h2>
+    <p>Faça parte da nossa missão! Preencha o formulário abaixo:</p>
 
-    <input type="text" id="nome" placeholder="Nome completo">
-    <input type="tel" id="telefone" maxlength="15" placeholder="(87) 9.9933-6143">
+    <form id="voluntarioForm">
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" placeholder="Seu nome" required>
 
-    <button type="submit">Enviar Cadastro</button>
-    <p id="msg"></p>
-</form>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" placeholder="seu@email.com" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" placeholder="(xx) xxxxx-xxxx" required>
+
+        <label for="interesse">Área de interesse:</label>
+        <select id="interesse" required>
+            <option value="">Selecione...</option>
+            <option value="distribuicao">Distribuição de alimentos</option>
+            <option value="organizacao">Organização de eventos</option>
+            <option value="divulgacao">Divulgação / Redes sociais</option>
+        </select>
+
+        <label for="mensagem">Por que deseja ser voluntário?</label>
+        <textarea id="mensagem" placeholder="Digite uma mensagem"></textarea>
+
+        <button type="submit" id="btnEnviar">Enviar Cadastro</button>
+        <p id="status" style="font-weight:bold; margin-top:10px;"></p>
+    </form>
+</section>
 
 <footer>
-© 2025 ONG Esperança Viva - Todos os direitos reservados.
+    <p>© 2025 – Projeto de Voluntariado</p>
 </footer>
 
+<!------------------------------------------
+ SCRIPT (não mexer no restante)
+------------------------------------------->
 <script>
-// MENU
-const menu = document.getElementById("menu");
-const menuBtn = document.getElementById("menuBtn");
-menuBtn.addEventListener("click", () => {
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-    menuBtn.textContent = menuBtn.textContent === "☰" ? "✖" : "☰";
+// MENU MOBILE
+function toggleMenu() {
+    document.querySelector(".menu").classList.toggle("active");
+}
+
+// MÁSCARA TELEFONE
+document.getElementById("telefone").addEventListener("input", function (e) {
+    let valor = e.target.value.replace(/\D/g, "");
+    valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
+    valor = valor.replace(/(\d)(\d{4})$/, "$1-$2");
+    e.target.value = valor;
 });
 
-// FORMULÁRIO
-const form = document.getElementById("form");
-const msg = document.getElementById("msg");
-const telefone = document.getElementById("telefone");
+// VALIDAÇÃO FORMULÁRIO
+document.getElementById("voluntarioForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-// máscara telefone
-telefone.addEventListener("input", () => {
-    let v = telefone.value.replace(/\D/g, "");
-    if (v.length > 10) telefone.value = v.replace(/(\d{2})(\d)(\d{4})(\d{4})/, "($1) $2.$3-$4");
-});
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const interesse = document.getElementById("interesse").value.trim();
 
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    if (nome.value === "" || telefone.value === "") {
-        msg.style.color = "red";
-        msg.textContent = "⚠️ Preencha todos os campos.";
+    if (!nome || !email || !telefone || !interesse) {
+        document.getElementById("status").style.color = "red";
+        document.getElementById("status").innerText = "⚠️ Preencha todos os campos obrigatórios!";
         return;
     }
 
-    msg.style.color = "green";
-    msg.textContent = "✅ Enviado com sucesso!";
-    form.reset();
+    document.getElementById("status").style.color = "green";
+    document.getElementById("status").innerText = "✅ Cadastro enviado com sucesso!";
+    document.getElementById("voluntarioForm").reset();
 });
 </script>
 
